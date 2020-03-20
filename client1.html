@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/client.js"></script>
+	</head>
+	<body>
+		<button id="get-data">获取数据哦</button>
+		<button id="set-data">设置</button>
+		<button id="del-data">删除数据</button>
+		
+		
+		<script type="text/javascript">
+			const crossStorage = new Client('http://localhost:8080/demo/corss-middle.html')
+
+			//在 client1 中，获取 client2 存储的数据
+			document.getElementById('get-data').addEventListener('click', () => {
+				crossStorage.getItem(['job', 'age'], (result, data) => {
+					console.log('client-1 getItem result: ', result)
+				})
+			}, false);
+
+			//设置数据
+			document.getElementById('set-data').addEventListener('click', () => {
+				crossStorage.setItem({
+					job: 'web前端',
+					money: 1000
+				}, null, (result) => {
+					console.log('完成本地存储')
+				})
+			}, false);
+			
+			
+			//删除数据
+			document.getElementById('del-data').addEventListener('click', () => {
+				crossStorage.delItem(['job'], (result) => {})
+			}, false);
+		</script>
+	</body>
+</html>
